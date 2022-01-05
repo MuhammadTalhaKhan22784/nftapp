@@ -33,7 +33,7 @@ const HeroConnected = props => {
     }
   }
 
-  const [showTimer, setShowTimer] = useState(false)
+  // const [showTimer, setShowTimer] = useState(false)
   const [showMint, setShowMint] = useState(false)
   const [timerDays, setTimerDays] = useState("00")
   const [timerHours, setTimerHours] = useState("00")
@@ -41,7 +41,7 @@ const HeroConnected = props => {
   const [timerSeconds, setTimerSeconds] = useState("00")
   let interval = useRef()
   const startTimer = () => {
-    const countdownDate = new Date("Jan 21, 2022 00:00:00").getTime()
+    const countdownDate = new Date("Jan 7, 2022 00:00:00").getTime()
     interval = setInterval(() => {
       const now = new Date().getTime()
       const distance = countdownDate - now
@@ -53,7 +53,7 @@ const HeroConnected = props => {
       const seconds = Math.floor((distance % (1000 * 60)) / 1000)
       if (distance < 0) {
         // stop our timer
-        setShowTimer(false)
+        // setShowTimer(false)
         clearInterval(interval.current)
         setShowMint(true)
       } else {
@@ -78,25 +78,26 @@ const HeroConnected = props => {
         5000 confused beans who have somehow made their way to the metaverse.
         Only on Solana
       </p>
-      <div className="timer-div">
-        <div className="time-box">
-          <h2>Days</h2>
-          <h2>{timerDays}</h2>
+      {timerDays && timerHours && timerMinutes && timerSeconds != "00" ? (
+        <div className="timer-div">
+          <div className="time-box">
+            <h2>Days</h2>
+            <h2>{timerDays}</h2>
+          </div>
+          <div className="time-box">
+            <h2>Hours</h2>
+            <h2>{timerHours}</h2>
+          </div>
+          <div className="time-box">
+            <h2>Minutes</h2>
+            <h2>{timerMinutes}</h2>
+          </div>
+          <div className="time-box">
+            <h2>Seconds</h2>
+            <h2>{timerSeconds}</h2>
+          </div>
         </div>
-        <div className="time-box">
-          <h2>Hours</h2>
-          <h2>{timerHours}</h2>
-        </div>
-        <div className="time-box">
-          <h2>Minutes</h2>
-          <h2>{timerMinutes}</h2>
-        </div>
-        <div className="time-box">
-          <h2>Seconds</h2>
-          <h2>{timerSeconds}</h2>
-        </div>
-      </div>
-      {showMint ? (
+      ) : (
         <button
           onClick={() => {
             setShowMint(true)
@@ -104,12 +105,10 @@ const HeroConnected = props => {
           }}
           data-aos="fade-up"
           data-aos-delay="200"
-          className="hero_mint"
+          className="hero_mint hero_connect"
         >
           Mint
         </button>
-      ) : (
-        ""
       )}
       <div
         data-aos="fade-up"
